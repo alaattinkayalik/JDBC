@@ -14,4 +14,26 @@ Query statements return a JDBC row result set. The row result set is used to wal
 
 There is an extension to the basic JDBC API in the javax.sql.
 
-JDBC connections are often managed via a connection pool rather than obtained directly from the driver.
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class Mydb1 {
+   static String URL = "jdbc:mysql://localhost/mydb";
+
+   public static void main(String[] args) {
+      try {
+        Class.forName("com.mysql.jdbc.Driver");
+
+        Connection conn = DriverManager.getConnection(URL, "root", "root");
+        Statement stmt = conn.createStatement();
+      
+        String sql = "INSERT INTO emp1 VALUES ('pctb5361', 'kiril', 'john', 968666668)";
+        stmt.executeUpdate(sql);
+           
+        System.out.println("Inserted records into the table...");
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+   }
+}
